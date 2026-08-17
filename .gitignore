@@ -1,5 +1,6 @@
 .tools/
 .edge-profile/
+.vscode/
 preview.png
 server.log
 server-error.log
@@ -7,4 +8,3 @@ server-error.log
 .tunnel.pid
 tunnel.log
 tunnel-error.log
-
