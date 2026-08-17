@@ -2,6 +2,8 @@
 
 一个适合 iPhone 使用的个人康复训练网页应用，包含：
 
+线上地址：<https://yhbyyds.github.io/rehab-daily-pwa/>
+
 - 单脚站立倒计时
 - 单脚前后跨越计数（默认 60 次）
 - 弹力带勾脚计数
