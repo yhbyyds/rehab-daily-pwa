@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f7f3" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="复健日常" />
+    <meta name="description" content="个人康复训练计时、计数和记录工具" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>复健日常</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="todayLabel"></p>
+          <h1>今天，稳稳练</h1>
+        </div>
+        <button class="icon-button" id="soundButton" aria-label="切换语音提示" aria-pressed="true">
+          <span id="soundIcon">◖))</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero" aria-label="今日训练概览">
+          <div>
+            <p>今日完成</p>
+            <strong><span id="todayDone">0</span><small> / 3 项</small></strong>
+          </div>
+          <div class="hero-ring" aria-hidden="true">
+            <svg viewBox="0 0 44 44">
+              <circle class="ring-track" cx="22" cy="22" r="18"></circle>
+              <circle class="ring-value" id="todayRing" cx="22" cy="22" r="18"></circle>
+            </svg>
+            <span id="todayPercent">0%</span>
+          </div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">训练计划</p>
+              <h2>选择一个动作</h2>
+            </div>
+            <span class="mini-chip">约 8 分钟</span>
+          </div>
+
+          <div class="exercise-list">
+            <button class="exercise-card green" data-exercise="balance">
+              <span class="exercise-number">01</span>
+              <span class="exercise-copy">
+                <strong>单脚站立</strong>
+                <small>保持平衡 · 自定义时间</small>
+              </span>
+              <span class="exercise-meta" id="balanceMeta">30 秒</span>
+              <span class="chevron">›</span>
+            </button>
+
+            <button class="exercise-card orange" data-exercise="cross">
+              <span class="exercise-number">02</span>
+              <span class="exercise-copy">
+                <strong>单脚前后跨越</strong>
+                <small>每次前跨或后跨计 1 次</small>
+              </span>
+              <span class="exercise-meta" id="crossMeta">60 次</span>
+              <span class="chevron">›</span>
+            </button>
+
+            <button class="exercise-card blue" data-exercise="band">
+              <span class="exercise-number">03</span>
+              <span class="exercise-copy">
+                <strong>弹力带勾脚</strong>
+                <small>按完成节奏点按计数</small>
+              </span>
+              <span class="exercise-meta" id="bandMeta">30 次</span>
+              <span class="chevron">›</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="section-block records-block">
+          <div class="section-heading compact">
+            <div>
+              <p class="section-kicker">训练记录</p>
+              <h2>最近完成</h2>
+            </div>
+            <button class="text-button" id="clearRecords">清空</button>
+          </div>
+          <div id="recordsList" class="records-list"></div>
+        </section>
+
+        <aside class="note-card">
+          <span>提示</span>
+          <p>请按医生或康复师给出的动作和训练量练习；疼痛明显或症状加重时停止训练。</p>
+        </aside>
+      </main>
+    </div>
+
+    <div class="session-overlay" id="sessionOverlay" aria-hidden="true">
+      <section class="session-sheet" role="dialog" aria-modal="true" aria-labelledby="sessionTitle">
+        <header class="session-header">
+          <button class="icon-button close-button" id="closeSession" aria-label="关闭">×</button>
+          <div>
+            <p id="sessionStep">动作 1 / 3</p>
+            <h2 id="sessionTitle">单脚站立</h2>
+          </div>
+          <span class="session-badge" id="sessionBadge">计时</span>
+        </header>
+
+        <div class="session-body">
+          <p class="instruction" id="sessionInstruction"></p>
+
+          <div class="control-panel" id="settingPanel">
+            <span id="settingLabel">训练时间</span>
+            <div class="stepper">
+              <button id="decreaseSetting" aria-label="减少">−</button>
+              <strong id="settingValue">30 秒</strong>
+              <button id="increaseSetting" aria-label="增加">＋</button>
+            </div>
+          </div>
+
+          <div class="progress-stage">
+            <svg class="session-ring" viewBox="0 0 220 220" aria-hidden="true">
+              <circle class="session-track" cx="110" cy="110" r="96"></circle>
+              <circle class="session-progress" id="sessionProgress" cx="110" cy="110" r="96"></circle>
+            </svg>
+            <button class="count-target" id="countTarget" aria-label="增加一次">
+              <span class="display-number" id="displayNumber">30</span>
+              <small id="displayUnit">秒</small>
+              <em id="tapHint">点击开始</em>
+            </button>
+          </div>
+
+          <div class="session-actions">
+            <button class="secondary-button" id="minusOne">− 1</button>
+            <button class="primary-button" id="mainAction">开始训练</button>
+            <button class="secondary-button" id="resetSession">重置</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

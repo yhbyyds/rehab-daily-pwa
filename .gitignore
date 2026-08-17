@@ -1,0 +1,10 @@
+.tools/
+.edge-profile/
+preview.png
+server.log
+server-error.log
+.server.pid
+.tunnel.pid
+tunnel.log
+tunnel-error.log
+
